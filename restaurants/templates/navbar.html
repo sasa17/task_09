@@ -1,5 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="{% url 'restaurant-list' %}">RestaurantHUB</a>
+    {% if request.user.is_authenticated %}
+      {{request.user}}
+    {% else %}
+      Guest
+    {% endif %}
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -15,6 +20,18 @@
       <input class="form-control mr-sm-2" type="text" name='q' placeholder="I don't do anything">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    
+
+    {% if request.user.is_authenticated %}
+    <li class = "nav-item">
+      <a class="nav-link disabled" href="{% url 'signout' %}">Sign Out</a>
+    </li>
+    {% else %}
+    <li class = "nav-item">
+      <a class="nav-link disabled" href="{% url 'signin' %}">Sign In</a>
+    </li>
+    <li class = "nav-item">
+      <a class="nav-link disabled" href="{% url 'signup' %}">Sign Up</a>
+    </li>
+    {% endif %}
   </div>
 </nav>
